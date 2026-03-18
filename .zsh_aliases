@@ -1,0 +1,7 @@
+alias ls='eza --icons=always --color=always'
+alias ll='eza -lh --icons=always --git'
+alias la='eza -a --icons=always'
+alias tree='eza --tree --icons=always'
+# alias vim="nvim"
+alias cat="bat"
+alias sizeof="du -sh"
