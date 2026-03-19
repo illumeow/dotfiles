@@ -47,28 +47,53 @@ _fzf_comprun() {
     cd|tree)           fzf --preview 'eza --tree --color=always {} | head -200' "$@" ;;
     export|unset) fzf --preview "eval 'echo $'{}" "$@" ;;
     ssh)          fzf --preview 'dig {}' "$@" ;;
-    *)            fzf --preview "bat -n --color=always --line-range :500 {}" "$@" ;;
+    *)            fzf --preview '~/.config/fzf/fzf_preview.sh {}' "$@" ;;
   esac
 }
 
 # --- 4. Aliases ---
 # Fast Neovim fuzzy-find: type 'fv', find your file, hit Enter to open in Neovim
-# alias fv='nvim $(fzf --preview="bat -n --color=always {}")'
 fv() {
   # 1. Capture the selection from fzf
   local selection
   selection=$(fzf --preview "~/.config/fzf/fzf_preview.sh {}")
 
-  # 2. Check if the user actually picked something (avoids errors on Esc)
+  # 2. Check if the user actually picked something
   if [[ -n "$selection" ]]; then
-    # 3. Change directory to the file's parent folder
-    cd "$(dirname "$selection")" || return
-    # 4. Open the file in Neovim (using basename since we are now in the folder)
-    nvim "$(basename "$selection")"
+    
+    # 3. Logic: If it's a directory, go there. Otherwise, go to parent.
+    if [[ -d "$selection" ]]; then
+      cd "$selection" || return
+      nvim .
+    else
+      cd "$(dirname "$selection")" || return
+      nvim "$(basename "$selection")"
+    fi
+
   fi
 }
 
 fcd() {
   local dir=$(fd --type d --hidden --exclude .git . ${1:-.} | fzf --preview 'eza --tree --color=always {} | head -20')
   [ -n "$dir" ] && cd "$dir"
+}
+
+fcode() {
+  # 1. Capture the selection from fzf
+  local selection
+  selection=$(fzf --preview "~/.config/fzf/fzf_preview.sh {}")
+
+  # 2. Check if the user actually picked something
+  if [[ -n "$selection" ]]; then
+    
+    # 3. Logic: If it's a directory, go there. Otherwise, go to parent.
+    if [[ -d "$selection" ]]; then
+      cd "$selection" || return
+      code .
+    else
+      cd "$(dirname "$selection")" || return
+      code "$(basename "$selection")"
+    fi
+
+  fi
 }
