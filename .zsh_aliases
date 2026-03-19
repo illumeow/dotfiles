@@ -5,3 +5,7 @@ alias tree='eza --tree --icons=always'
 # alias vim="nvim"
 alias cat="bat"
 alias sizeof="du -sh"
+alias gst="git status"
+alias ga="git add"
+alias gc"git commit"
+alias gp="git push"

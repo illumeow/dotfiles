@@ -67,3 +67,8 @@ fv() {
     nvim "$(basename "$selection")"
   fi
 }
+
+fcd() {
+  local dir=$(fd --type d --hidden --exclude .git . ${1:-.} | fzf --preview 'eza --tree --color=always {} | head -20')
+  [ -n "$dir" ] && cd "$dir"
+}
