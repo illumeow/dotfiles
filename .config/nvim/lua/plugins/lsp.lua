@@ -4,19 +4,26 @@ return {
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
         "folke/neoconf.nvim",
-        "folke/neodev.nvim", 
+        {
+            "folke/lazydev.nvim",
+            ft = "lua", -- only load on lua files
+            opts = {
+                library = {
+                    -- Load luvit types when the `vim.uv` word is found
+                    { path = "luvit-meta/library", words = { "vim%.uv" } },
+                },
+            },
+        },
+        { "Bilal2453/luvit-meta", lazy = true },
     },
     config = function()
+        require("neoconf").setup()
+        require("mason").setup()
+
         local servers = {
             clangd = {},  -- C/C++
             pyright = {}, -- Python
-            
-            lua_ls = {
-                Lua = {
-                    workspace = { checkThirdParty = false },
-                    telemetry = { enable = false },
-                },
-            },
+            lua_ls = {},  -- lua
         }
 
         local on_attach = function(_, bufnr)
@@ -52,10 +59,6 @@ return {
             },
         })
 
-        require("neodev").setup()
-        require("neoconf").setup()
-        require("mason").setup()
-        
         local capabilities = require('cmp_nvim_lsp').default_capabilities()
         
         require("mason-lspconfig").setup({

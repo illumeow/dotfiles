@@ -1,46 +1,43 @@
-local option = vim.opt
-local buffer = vim.b
-local global = vim.g
-
 -- Globol Settings --
-option.showmode = false
-option.backspace = { "indent", "eol", "start" }
-option.tabstop = 4
-option.shiftwidth = 4
-option.expandtab = true
-option.shiftround = true
-option.autoindent = true
-option.smartindent = true
-option.number = true
-option.relativenumber = true
-option.wildmenu = true
-option.hlsearch = false
-option.ignorecase = true
-option.smartcase = true
-option.completeopt = { "menuone", "noselect" }
-option.cursorline = true
-option.termguicolors = true
-option.signcolumn = "yes"
-option.autoread = true
-option.title = true
-option.swapfile = false
-option.backup = false
-option.updatetime = 50
-option.mouse = "a"
-option.undofile = true
-option.undodir = vim.fn.expand('$HOME/.local/share/nvim/undo')
-option.exrc = true
-option.wrap = false
-option.splitright = true
-vim.o.scrolloff = 3
+vim.opt.showmode = false
+vim.opt.backspace = { "indent", "eol", "start" }
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+vim.opt.shiftround = true
+vim.opt.autoindent = true
+vim.opt.smartindent = true
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.wildmenu = true
+vim.opt.hlsearch = false
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.completeopt = { "menuone", "noselect" }
+vim.opt.cursorline = true
+vim.opt.termguicolors = true
+vim.opt.signcolumn = "yes"
+vim.opt.autoread = true
+vim.opt.title = true
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.updatetime = 50
+vim.opt.mouse = "a"
+vim.opt.undofile = true
+vim.opt.undodir = vim.fn.expand('$HOME/.local/share/nvim/undo')
+vim.opt.exrc = true
+vim.opt.wrap = false
+vim.opt.splitright = true
+vim.opt.scrolloff = 3
 vim.opt.encoding = "utf-8"
 vim.opt.fileencoding = "utf-8"
+vim.opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus"
 
 -- Buffer Settings --
-buffer.fileencoding = "utf-8"
+vim.b.fileencoding = "utf-8"
 
 -- Global Settings --
-global.mapleader = " "
+vim.g.mapleader = " "
 
 -- Key mappings --
 
