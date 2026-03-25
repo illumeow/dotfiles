@@ -6,18 +6,11 @@ setopt beep extendedglob nomatch notify
 unsetopt autocd
 bindkey -e
 # End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-zstyle :compinstall filename '/home/student/13/b13902139/.zshrc'
 
+# path to custom completions
 fpath=(~/.zsh/completions $fpath)
 
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
-
-if [ -f ~/.zsh_aliases ]; then
-    . ~/.zsh_aliases
-fi
+[ -f ~/.zsh_aliases ] && source ~/.zsh_aliases
 
 export PATH="$HOME/.local/bin:$PATH"
 
@@ -27,12 +20,15 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.zsh/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
+# disable zsh-autocomplete's history menu
 bindkey '\e[A' up-line-or-history
 bindkey '\eOA' up-line-or-history
 bindkey '\e[B' down-line-or-history
 bindkey '\eOB' down-line-or-history
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source <(fzf --zsh)
 source ~/.config/fzf/fzf_opts.zsh
 
 export BAT_THEME="tokyonight_night"
+
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
