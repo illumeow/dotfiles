@@ -1,0 +1,7 @@
+[package]
+name = "note"
+version = "1.0.0"
+entrypoint = "note.typ"
+authors = ["illumeow"]
+license = "MIT"
+description = "Note template"
