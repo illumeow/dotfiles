@@ -10,6 +10,7 @@ bindkey -e
 # path to custom completions
 fpath=(~/.zsh/completions $fpath)
 
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
 [ -f ~/.zsh_aliases ] && source ~/.zsh_aliases
 
 export PATH="$HOME/.local/bin:$PATH"
@@ -31,4 +32,3 @@ source ~/.config/fzf/fzf_opts.zsh
 
 export BAT_THEME="tokyonight_night"
 
-[ -f ~/.zshrc.local ] && source ~/.zshrc.local
